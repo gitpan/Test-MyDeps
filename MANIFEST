@@ -1,0 +1,16 @@
+Build.PL
+Changes
+lib/Test/MyDeps.pm
+LICENSE
+MANIFEST			This list of files
+t/01-basic.t
+xt/all-my-deps.t
+xt/kwalitee.t
+xt/pod-coverage.t
+xt/pod-spell.t
+xt/pod.t
+xt/two-distros.t
+Makefile.PL
+README
+META.yml
+SIGNATURE    Added here by Module::Build

@@ -1,0 +1,32 @@
+---
+abstract: 'Test all modules which depend on your module'
+author:
+  - 'Dave Rolsky, E<lt>autarch@urth.orgE<gt>'
+build_requires:
+  Test::More: 0
+configure_requires:
+  Module::Build: 0.35
+generated_by: 'Module::Build version 0.351'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Test-MyDeps
+provides:
+  Test::MyDeps:
+    file: lib/Test/MyDeps.pm
+    version: 0.01
+requires:
+  CPAN: 1.9402
+  CPANDB: 0.12
+  Cwd: 0
+  Exporter: 0
+  File::Spec: 0
+  File::Temp: 0
+  File::chdir: 0
+  IPC::Run3: 0
+  Test::More: 0
+  autodie: 0
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.01
