@@ -47,7 +47,9 @@ FUNCTIONS
     Test::More for you.
 
     If you want to exclude some dependencies, you can pass a regex which
-    will be used to exclude any matching distributions.
+    will be used to exclude any matching distributions. Note that this will
+    be tested against the *distribution name*, which will be something like
+    "Test-MyDeps" (note the lack of colons).
 
     Additionally, any distribution name starting with "Task" or "Bundle" is
     always excluded.
@@ -77,7 +79,7 @@ WARNINGS, LOGGING AND VERBOSITY
     simply set $ENV{PERL_TEST_MD_LOG} to the path of the log file.
 
     You also can enable CPAN's output by setting the
-    `$ENV{TEST_PERL_MD_CPAN_VERBOSE}' variable to a true value.
+    `$ENV{PERL_TEST_MD_CPAN_VERBOSE}' variable to a true value.
 
 BUGS
     Please report any bugs or feature requests to

@@ -3,7 +3,7 @@ package Test::MyDeps;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 # CPAN::Reporter spits out random output we don't want, and we don't want to
 # report these tests anyway.
@@ -37,7 +37,7 @@ BEGIN
     no warnings 'redefine';
 
     my $fh;
-    if ( $ENV{TEST_PERL_MD_CPAN_VERBOSE} ) {
+    if ( $ENV{PERL_TEST_MD_CPAN_VERBOSE} ) {
         $fh = io_from_write_cb( sub { Test::More::diag( $_[0] ) } );
     }
     else {
@@ -93,9 +93,9 @@ sub _get_deps {
         ? sub { $_[0] !~ /$params->{exclude}/ }
         : sub {1};
 
-    return map { $_->distribution() }
-        grep   { $_ !~ /^(?:Task|Bundle)/ }
-        grep   { $allow->($_) } @deps;
+    return grep { $_ !~ /^(?:Task|Bundle)/ }
+        grep    { $allow->($_) }
+        map { $_->distribution() } @deps;
 }
 
 sub test_module {
@@ -198,7 +198,8 @@ sub _install_prereqs {
 }
 
 {
-    my $Dir = tempdir( CLEANUP => 1 );
+    my $Dir;
+    BEGIN { $Dir = tempdir( CLEANUP => 1 ); }
 
     sub _temp_lib_dir {
         return $Dir;
@@ -241,6 +242,8 @@ sub _run_commands {
 sub _run_tests {
     my $output = q{};
     my $error  = q{};
+
+    diag( "PERL5LIB is $ENV{PERL5LIB}" );
 
     my $stderr = sub {
         my $line = shift;
@@ -321,7 +324,9 @@ Given a module name, this function uses C<CPANDB> to find all its dependencies
 and test them. It will call the C<plan()> function from L<Test::More> for you.
 
 If you want to exclude some dependencies, you can pass a regex which will be
-used to exclude any matching distributions.
+used to exclude any matching distributions. Note that this will be tested
+against the I<distribution name>, which will be something like "Test-MyDeps"
+(note the lack of colons).
 
 Additionally, any distribution name starting with "Task" or "Bundle" is always
 excluded.
@@ -354,7 +359,7 @@ output of the test suite for each dependency. To enable this, simply set
 $ENV{PERL_TEST_MD_LOG} to the path of the log file.
 
 You also can enable CPAN's output by setting the
-C<$ENV{TEST_PERL_MD_CPAN_VERBOSE}> variable to a true value.
+C<$ENV{PERL_TEST_MD_CPAN_VERBOSE}> variable to a true value.
 
 =head1 BUGS
 
