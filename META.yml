@@ -15,7 +15,7 @@ name: Test-MyDeps
 provides:
   Test::MyDeps:
     file: lib/Test/MyDeps.pm
-    version: 0.02
+    version: 0.03
 requires:
   CPAN: 1.9402
   CPANDB: 0.12
@@ -24,9 +24,10 @@ requires:
   File::Spec: 0
   File::Temp: 0
   File::chdir: 0
+  IO::Handle::Util: 0
   IPC::Run3: 0
   Test::More: 0
   autodie: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.02
+version: 0.03

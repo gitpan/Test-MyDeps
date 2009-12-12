@@ -12,6 +12,7 @@ WriteMakefile
                            'File::Spec' => '0',
                            'File::Temp' => '0',
                            'File::chdir' => '0',
+                           'IO::Handle::Util' => '0',
                            'IPC::Run3' => '0',
                            'Test::More' => 0,
                            'autodie' => '0'
